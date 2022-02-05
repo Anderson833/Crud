@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt"
+ layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>Busca de Usuarios</title>
+</head>
+<body>
+
+  <section layout:fragment="corpo">
+
+   <div th:replace="fragments/mensagens"></div>
+
+
+<h1>Busca de  Usuarios</h1>
+
+  <form th:action="@{/usuarios/buscar}"
+  method="get">
+   <table>
+      <tr>
+        <td>Nome:</td>
+        <td>
+          <input type="text" th:name="nome"/>
+           </td>
+         
+        </tr>
+         <tr>
+        <td>Email:</td>
+        <td>
+          <input type="email" th:name="email"/>
+           </td>
+         
+        </tr>
+        
+        
+        
+        
+         <tr>
+            <td colspan="2">
+              <input type="checkbox"
+                th:name="mostrarTodosDados"
+                th:value="true"/>
+               <p> Mostrar todos os dados dos usuarios</p>
+                </td>
+                </tr>
+                 <tr>
+                 
+                   <td> </td>
+                     <td>
+                       <input type="submit" value="Buscar"/>
+                         <input type="submit" value="Cancelar"
+                          formaction="/" formmethod="get"/>
+     </td>
+     </tr>
+   </table>
+  
+  
+  
+  
+  
+  </form>
+  
+     <div th:if="${not #lists.isEmpty(usuariosEncontrados)}">
+     <table>
+          <tr>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th th:if="${mostrarTodosDados} == true">Sexo</th>
+            <th th:if="${mostrarTodosDados} == true">Profissão</th>
+            <th>Opcões</th>
+          </tr>
+            <tr th:each="u :${usuariosEncontrados}">
+             <td>
+             <img th:if="${u.foto != null}"
+                  th:src="@{/download/}  +  ${u.foto.id} +  '?salvar=false'"
+                  Style="max-height: 128px;"/>
+             
+             </td>
+            <td th:text="${u.nome}"></td> 
+             <td th:text="${u.email}"></td>
+             <th th:if="${mostrarTodosDados} == true"
+               th:text="${u.sexo}"> </th>
+            <th th:if="${mostrarTodosDados} == true"
+               th:text="${u.profissao.nome}"> </th>
+               
+              <td>
+               <a th:href="'/usuarios/editar/' + ${u.id}">
+               Editar
+               </a>
+                <a th:href="'/usuarios/remover/' + ${u.id}"
+               th:onclick="if (!confirm('Deseja realmente remover usuário?')) return false;">Remover</a>
+               
+               </tr>
+  
+         </table>
+     </div>
+   </section>
+  
+</body>
+</html>
