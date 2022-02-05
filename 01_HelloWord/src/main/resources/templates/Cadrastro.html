@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+<meta charset="utf-8">
+<title>Cadratros</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+     
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         
+<style type="text/css">
+
+.forClientes{
+box-shadow: 0px 0px 5px gray;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+
+}
+
+</style>
+   
+</head>
+<body>
+   <div th:if="${msgSucesso} != null">
+     <b  th:text="${msgSucesso}" style="color: blue;"></b>
+    <br/><br/>
+    </div>
+    <div th:if="${msgError} != null">
+    <b  th:text="${msgError}" style="color: red;"></b>
+      <br/><br/>
+ </div> 
+   
+   <header>
+     <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Cadrastrar Clientes</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/clientes" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Lista Clientes</a></li>
+      
+      </ul>
+    </div>
+  </nav>
+    
+ </header>
+ 
+ 
+ <div class="container forClientes">
+  <form class="container" method="post">
+    
+      Nome:
+          <input type="text"  name="nome" />
+     <div class="row">
+
+        <div class="input-field col s3">
+           Telefone:
+          <input type="text" name="telefone" />
+          </div>
+          <div class="input-field col s9">
+           Descrição:
+           <input type="text"  name="descricao"/>
+          </div>
+  </div>
+         <input class="waves-effect waves-light btn " type="submit" value="Adicionar">
+    
+ </form>
+   </div>
+  
+  <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

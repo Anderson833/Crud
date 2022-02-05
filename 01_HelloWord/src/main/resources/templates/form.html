@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+ <form th:action="@{/Formulario/dados}"
+  th:object="${texto}"
+  method="post">
+ 
+ 
+ Nome:
+ <input type="text"  th:field="${texto.conteudo}" />
+ E-mail:
+ <input type="submit" value="enviar" />
+ 
+ 
+
+ </form>
+    <p th:text="${texto1}"> </p>
+ 
+
+</body>
+</html>

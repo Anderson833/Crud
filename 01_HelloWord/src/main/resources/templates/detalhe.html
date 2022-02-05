@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="pt"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+ <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="utf-8">
+<title>Lista</title>
+
+ <style type="text/css">
+ .detalhe{
+
+	box-shadow: 0px 0px 5px gray;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-bottom: 60px;
+	
+}
+.divform{
+
+box-shadow: 0px 0px 5px gray;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+}
+.tabeladados{
+  width: 500px;
+}
+
+ 
+ </style>
+    
+</head>
+<body>
+
+<div th:if="${msgSucesso} != null">
+ <b  th:text="${msgSucesso}" style="color: blue;"></b>
+  <br/><br/>
+ </div>
+ <div th:if="${msgError} != null">
+ <b  th:text="${msgError}" style="color: red;"></b>
+  <br/><br/>
+ </div>
+ 
+  <header>
+     <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Clientes</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/clientes" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Lista Clientes</a></li>
+      
+      </ul>
+    </div>
+  </nav>
+    
+ </header>
+ 
+   
+    <div  th:each="evento: ${evento}" class="container detalhe">
+     <div class="row">
+         
+       
+          <p>Nome: <span th:text="${evento.nome}"></span></p>
+          <p>Telefone: <span th:text="${evento.telefone}"></span></p>
+          <p>Descrição: <span th:text="${evento.descricao}"></span></p>
+     
+    
+       </div>
+     </div>
+     
+     <br><br>
+    
+    <div class="container divform">
+     <form method="Post" name="cadrastro">
+      
+        RG:<input type="text"  name="rg" placeholder="Digite seu RG"/>
+        CPF: <input type="text"  name="cpf" placeholder="Digite CPF"/>
+    
+         <input class="waves-effect waves-light btn" type="submit" value="salvar" onclick="valida()"/>
+    
+    </form>
+   
+   </div>
+ 
+   <br>
+ 
+  <table class="container tabeladados">
+       <thead>
+         <tr>
+            <th>RG</th>
+            <th>CPF</th>
+            <th>Deletar</th>
+         </tr>
+       
+       </thead>
+    <tbody>
+         <tr th:each="dado : ${dados}">
+          <td th:text="${dado.rg}"></td>
+           <td th:text="${dado.cpf}"></td>
+           <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('IC#deletaDados').arg(0,dado.rg)).build()}"><i class="material-icons left">delete</i></a>
+       </tr>
+    </tbody>
+  
+  
+  </table>
+  
+ 
+   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+   
+  <script type="text/javascript">
+  
+  function valida(){
+		let rg = cadrastro.rg.value
+		let cpf = cadrastro.cpf.value
+		
+		if(rg==="" && cpf===""){
+			alert("Preenchar os campos!")
+			cadrastro.nome.focus()
+			return false
+			
+		}
+		
+		else if(rg===""){
+			alert("Preenchar o campo RG")
+			cadrastro.nome.focus()
+			return false
+			
+		}
+		
+		else if(cpf===""){
+			alert("Preenchar o campo CPF")
+			cadrastro.fone.focus()
+			return false
+		}else{
+			
+		
+		    document.forms["cadrastro"].submit();
+	       	alert('Dados cadrastrador com sucesso!')
+		
+		 }
+		
+		
+	}
+
+  
+  
+  </script>
+    
+</body>
+</html>
